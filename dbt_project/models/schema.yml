@@ -1,0 +1,21 @@
+version: 2
+sources:
+  - name: snowflake_raw
+    tables:
+      - name: raw_accounts_cdc
+      - name: raw_transactions_cdc
+
+models:
+  - name: dim_accounts_scd2
+    columns:
+      - name: account_sk
+        tests: [unique, not_null]
+      - name: account_id
+        tests: [not_null]
+
+  - name: fct_ledger_transactions
+    columns:
+      - name: transaction_id
+        tests: [unique, not_null]
+      - name: account_id
+        tests: [not_null]
